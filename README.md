@@ -496,11 +496,43 @@ yag.send('填收件人邮箱', '主题:学习使我快乐', contents)
 
 ![PC端优化后的邮件效果](https://cdn.fangyuanxiaozhan.com/assets/1630399693988c2tk8n7k.png)
 
-## 微信交流群
+#一、进入仓库 Secrets 页面
+打开你的 garss 仓库页面
+点上方 Settings（在 Code / Issues / Pull requests 那一行最右边）
+左侧菜单找到 Secrets and variables → Actions
+点 New repository secret（绿色按钮）
 
-[https://frp.v2fy.com/dynamic-picture/%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4/qr.png](https://frp.v2fy.com/dynamic-picture/%E5%BE%AE%E4%BF%A1%E4%BA%A4%E6%B5%81%E7%BE%A4/qr.png)
+二、必须添加的 4 个 Secret（garss 固定名字，不能错）
+逐个添加，Name 必须完全照抄，Value 填你自己的：
+SMTP_HOST值：smtp.qq.com 或 smtp.163.com 等
+SMTP_PORT值：465（SSL）或 587（TLS）
+SMTP_USER值：你的完整发件邮箱（如 xxx@qq.com）
+SMTP_PASS值：邮箱授权码（不是登录密码！）
 
+三、QQ / 163 邮箱怎么拿授权码（最容易卡这里）
+QQ 邮箱
+登录 mail.qq.com
+设置 → 账户 → 开启 POP3/SMTP 服务
+生成授权码（16 位字母数字），复制填到 SMTP_PASS
+163 邮箱
+登录 mail.163.com
+设置 → POP3/SMTP/IMAP → 开启 SMTP
+生成客户端授权密码，复制填到 SMTP_PASS
 
-## 广告位招租
+四、garss 里的 tasks.json（收件人）
+仓库根目录 tasks.json，写成这样：只写收信邮箱，不要在这里写发件密码。
 
-![广告位招租](https://raw.githubusercontent.com/zhaoolee/ChineseBQB/master/README/zhaoolee-link.png)
+二、开启 GitHub Actions 权限（关键！不然跑不起来）
+仓库 → Settings → Actions → General
+找到 Actions permissions
+选：Allow all actions
+点 Save
+2）RSS 订阅：README.md 里加订阅
+打开仓库 README.md，往下翻，有一段是 RSS 列表，格式：
+plaintext
+- 博客名称: https://xxx.com/rss.xml
+随便改一个字符（比如加个空格），然后 Commit + Push 到 main 分支。→ 这一步会自动触发一次运行。
+四、手动触发一次，测试是否能发邮件（最关键验证）
+仓库页面 → 点 Actions 标签
+左边工作流列表，选 garss
+右上角 Run workflow → 再点 Run workflow（分支选 main）
