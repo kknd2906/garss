@@ -1,12 +1,3 @@
-name: RSS更新任务
-permissions:
-  contents: write  # 授予写入仓库代码权限
-on:
-  push:
-  schedule:
-    - cron: '0 6 * * *'
-      timezone: Asia/Shanghai
-# 下面原有jobs代码不动，直接保留
 
 name: zhaoolee
 on:
