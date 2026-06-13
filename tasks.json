@@ -2,9 +2,6 @@
     "tasks": [
         {
             "email": "3584537721@qq.com"
-        },
-        {
-           password="mqzshtmrwfvodbfa", host='imap.qq.com'
         }
     ]
 }
